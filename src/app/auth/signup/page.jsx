@@ -2,21 +2,34 @@
 import { authClient } from "@/lib/auth-client";
 import { Check } from "@gravity-ui/icons";
 import { Button, Description, FieldError, Form, Input, Label, TextField } from "@heroui/react";
+import { Aladin } from "next/font/google";
 
 const SignUpPage = () => {
     const onSubmit = async (e) => {
         e.preventDefault();
-        const formData = new FormData(e.currentTarget);
-        const userData =Object.fromEntries(formData.entries());
-        console.log("form data with",data);
 
-        const {data,error} = await authClient.signUp.email({
+        const form = e.currentTarget;
+        const formData = new FormData(form);
+
+        const userData = Object.fromEntries(formData.entries());
+
+        console.log("userData:", userData);
+
+        const { data, error } = await authClient.signUp.email({
             name: userData.name,
-            email:userData.email,
-            password:userData.password
-        })
-        console.log("Signup with response",{data,error});
-    }
+            email: userData.email,
+            password: userData.password,
+            callbackURL:'/'
+        });
+
+        console.log({ data, error });
+        if(error){
+            alert("Error Sigining up:" + error.message)
+        }
+        if(data){
+            alert("Signup Successful!!")
+        }
+    };
     return (
         <div>
             <h2>Please sign up</h2>
