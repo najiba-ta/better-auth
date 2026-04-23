@@ -1,5 +1,5 @@
 'use client'
-import { useSession } from "@/lib/auth-client";
+import { signOut, useSession } from "@/lib/auth-client";
 import { Link, Button } from "@heroui/react";
 import { isPayloadMethod } from "better-auth/react";
 
@@ -28,7 +28,8 @@ const Navbar = () => {
     <div>
         {user ? <>
         <p>Welcome,{user.name}!</p>
-        <button>SignOut</button></> : <></>}
+        <button onClick={() => signOut()}>
+            SignOut</button></> : <Link href="/auth/signin">Sign In</Link>}
     </div>
   </header>
 </nav> 
