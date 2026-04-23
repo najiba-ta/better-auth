@@ -2,7 +2,7 @@
 import { authClient } from "@/lib/auth-client";
 import { Check } from "@gravity-ui/icons";
 import { Button, Description, FieldError, Form, Input, Label, TextField } from "@heroui/react";
-import { Aladin } from "next/font/google";
+
 
 const SignUpPage = () => {
     const onSubmit = async (e) => {
